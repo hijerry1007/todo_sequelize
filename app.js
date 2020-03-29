@@ -33,7 +33,10 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   next()
 })
+
+app.use('/', require('./routes/home'))
 app.use('/users', require('./routes/user'))
+app.use('/todos', require('./routes/todo'))
 
 // 設定 express port 3000
 app.listen(port, () => {
