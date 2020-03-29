@@ -17,6 +17,7 @@ router.get('/new', authenticated, (req, res) => {
 
 // 顯示一筆 Todo 的詳細內容
 router.get('/:id', authenticated, (req, res) => {
+  console.log(req.user.id)
   User.findByPk(req.user.id)
     .then((user) => {
       if (!user) throw new Error("user not found");
