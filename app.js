@@ -17,6 +17,22 @@ app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+const session = require('express-session')
+const passport = require('passport')
+
+app.use(session({
+  secret: 'your secret key',
+  resave: 'false',
+  saveUninitialized: 'false',
+}))
+// 使用 Passport - 要在「使用路由器」前面
+app.use(passport.initialize())
+app.use(passport.session())
+require('./config/passport')(passport)
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 app.use('/users', require('./routes/user'))
 
 // 設定 express port 3000
