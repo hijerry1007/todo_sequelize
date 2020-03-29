@@ -1,27 +1,40 @@
-<div class="container">{{#if isAuthenticated}}
-  <h6 class="mt-1 mr-3">歡迎回來{{user.name}}</h6>
-  <a href="/users/logout" class="btn btn-danger my-2 my-sm-0">登出</a>
-  {{else}}
-  <a href="/users/login" class="btn btn-danger my-2 my-sm-0">登入</a>
-  {{/if}}</div>
-
-<a href="/todos/new" class="btn btn-primary mb-3">Create</a>
-<ul class="list-group">
-  {{#each todos}}
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-auto mr-auto">
-        <input style="vertical-align: middle;" type="checkbox" name="done" {{#if this.done }} checked{{/if}} />
-        <h4 style="display: inline;vertical-align: middle;">{{{this.name}}}</h4>
-      </div>
-      <div class="col-auto">
-        <a href="/todos/{{{this.id}}}" class="btn btn-secondary">detail</a>
-        <a href="/todos/{{{this.id}}}/edit" class="btn btn-success">edit</a>
-        <form action="/todos/{{{this._id}}}/delete?_method=DELETE" method="post" style="display:inline">
-          <button type="submit" class="btn btn-danger">delete</button>
-        </form>
-      </div>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-2">
+      {{#if isAuthenticated}}
+      <h6 class="mt-1 mr-3">歡迎回來{{user.name}}</h6>
+      <a href="/users/logout" class="btn btn-danger my-2 my-sm-0">登出</a>
+      {{else}}
+      <a href="/users/login" class="btn btn-danger my-2 my-sm-0">登入</a>
+      {{/if}}
     </div>
-  </li>
-  {{/each}}
-</ul>
+  </div>
+
+  <div class="row">
+    <div class="col-6"><a href="/todos/new" class="btn btn-primary mb-3">Create</a>
+    </div>
+    <div class="col-12">
+      <ul class="list-group">
+        {{#each todos}}
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-auto mr-auto">
+              <input style="vertical-align: middle;" type="checkbox" name="done" {{#if this.done }} checked{{/if}} />
+              <h4 style="display: inline;vertical-align: middle;">{{{this.name}}}</h4>
+            </div>
+            <div class="col-auto">
+              <a href="/todos/{{{this.id}}}" class="btn btn-secondary">detail</a>
+              <a href="/todos/{{{this.id}}}/edit" class="btn btn-success">edit</a>
+              <form action="/todos/{{{this.id}}}/delete?_method=DELETE" method="post" style="display:inline">
+                <button type="submit" class="btn btn-danger">delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+
+  </div>
+
+</div>
